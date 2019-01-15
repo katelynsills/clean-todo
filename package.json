@@ -1,0 +1,22 @@
+{
+  "name": "clean-todo",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kate Sills",
+  "license": "ISC",
+  "dependencies": {
+    "attenuate-fs": "file:custom_modules/attenuate-fs",
+    "attenuate-os": "file:custom_modules/attenuate-os",
+    "attenuate-process": "file:custom_modules/attenuate-process",
+    "chalk": "file:custom_modules/chalk",
+    "minimist": "^1.2.0",
+    "supports-color": "file:custom_modules/supports-color"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0"
+  },
+  "description": ""
+}

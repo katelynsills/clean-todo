@@ -1,0 +1,6 @@
+[submodule "custom_modules/chalk"]
+	path = custom_modules/chalk
+	url = https://github.com/katelynsills/chalk.git
+[submodule "custom_modules/supports-color"]
+	path = custom_modules/supports-color
+	url = https://github.com/katelynsills/supports-color.git
