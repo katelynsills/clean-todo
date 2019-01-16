@@ -1,9 +1,9 @@
 const harden = Object.freeze;
 
-const attenuateOs = (originalOs) => {
+const attenuateOs = (originalOs) =>
   // we know the result is pure
-  return harden({
+  harden({
     release: originalOs.release,
-  }) 
-}
+  });
+
 module.exports = attenuateOs;

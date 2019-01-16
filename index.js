@@ -1,5 +1,5 @@
 // run from command line
-// takes an argument 
+// takes an argument
 // saves it to file, appending it
 // displays data, highlighing high, medium, and low priority tasks
 
@@ -17,70 +17,72 @@ const altOs = attenuateOs(os);
 const altFs = attenuateFs(fs);
 const chalk = pureChalk(altOs, altProcess);
 
-// when we logged from supports-color/index 
+// when we logged from supports-color/index
 // and supports-color/pure-supports-color, it logged twice
 // this needs investigation
 
-const todoFile = 'todo.txt'
+const todoFile = 'todo.txt';
 
-const addTodoToFile = (todo, priority='Medium') => {
-    altFs.appendFile(todoFile, `${priority}: ${todo} \n`, (err) => {
-        if (err) throw err;
-        console.log('Todo was added');
-      });
-}
+const addTodoToFile = (todo, priority = 'Medium') => {
+  altFs.appendFile(todoFile, `${priority}: ${todo} \n`, err => {
+    if (err) throw err;
+    console.log('Todo was added');
+  });
+};
 
-const addTodo = (args) => {
-  const {todo, priority} = args
-  addTodoToFile(todo, priority)
-}
+const addTodo = args => {
+  const { todo, priority } = args;
+  addTodoToFile(todo, priority);
+};
 
-const highlightTodo = (todoLine) => {
-    const [priority, todo] = todoLine.split(": ")
-    switch (priority) {
-        case 'High': 
-            return chalk.red(todo)
-        case 'Medium':
-            return chalk.yellow(todo)
-        case 'Low':
-            return chalk.green(todo)
-    }
-}
+const highlightTodo = todoLine => {
+  const [priority, todo] = todoLine.split(': ');
+  switch (priority) {
+    case 'High':
+      return chalk.red(todo);
+    case 'Medium':
+      return chalk.yellow(todo);
+    case 'Low':
+      return chalk.green(todo);
+  }
+};
 
-
-// note that if the file does not exist, an error is thrown, 
+// note that if the file does not exist, an error is thrown,
 // and somehow this doesn't catch it
 
 const displayTodos = () => {
   try {
-      const stream = altFs.createReadStream(todoFile)
-      const lineReader = require('readline').createInterface({
-          input: stream
-      });
-      console.log(chalk.greenBright('****** TODAY\'S TODOS ********'))
-      lineReader.on('line', (line) => {
-          console.log(highlightTodo(line));
-      });
+    const stream = altFs.createReadStream(todoFile);
+    const lineReader = require('readline').createInterface({
+      input: stream,
+    });
+    console.log(chalk.greenBright("****** TODAY'S TODOS ********"));
+    lineReader.on('line', line => {
+      console.log(highlightTodo(line));
+    });
   } catch (err) {
-    console.log(chalk.red('There was an error, meaning that there was probably nothing to display. Please add a todo first'));        
+    console.log(
+      chalk.red(
+        'There was an error, meaning that there was probably nothing to display. Please add a todo first',
+      ),
+    );
   }
-}
+};
 
-/* we expect { 
-    _: [], 
-    'add'|'display': true, 
-    todo: todoText, 
-    priority:'Low'|'Medium'|'High' 
+/* we expect {
+    _: [],
+    'add'|'display': true,
+    todo: todoText,
+    priority:'Low'|'Medium'|'High'
 }
 todo is required if run is 'add', and priority defaults to Medium
 */
 
 const args = parseArgs(process.argv.slice(2));
 if (args.add) {
-    addTodo(args)
+  addTodo(args);
 } else if (args.display) {
-    displayTodos();
+  displayTodos();
 } else {
-    console.log('ERROR: not a valid command;')
+  console.log('ERROR: not a valid command;');
 }
-
