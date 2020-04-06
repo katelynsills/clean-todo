@@ -12,7 +12,7 @@
     "attenuate-os": "file:custom_modules/attenuate-os",
     "attenuate-process": "file:custom_modules/attenuate-process",
     "chalk": "file:custom_modules/chalk",
-    "minimist": "^1.2.2",
+    "minimist": "^1.2.3",
     "supports-color": "file:custom_modules/supports-color"
   },
   "devDependencies": {
